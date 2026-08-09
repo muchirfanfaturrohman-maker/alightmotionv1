@@ -276,7 +276,6 @@
     <script>
         // ================= CONFIGURATION =================
         const AM_API_KEY = 'vannzstore'; 
-        const RAMASHOP_API_KEY = 'rg_1af70760859a1902cbab809df49e6d'; 
         
         let savedEmail = '';
         let paymentInterval = null;
@@ -305,60 +304,19 @@
             document.getElementById(screenId).classList.add('active');
         }
 
-        // ================= API FETCH DENGAN MULTI-PROXY BYPASS =================
-        async function fetchWithCorsBypass(url, options) {
-            // 1. Coba fetch langsung dulu (siapa tau udah support CORS / hosted di domain yang sama)
-            try {
-                const response = await fetch(url, options);
-                if (response.ok) return await response.json();
-            } catch (e) {}
-
-            // 2. Daftar proxy alternatif jika fetch langsung diblokir
-            const proxies = [
-                'https://corsproxy.io/?',
-                'https://api.allorigins.win/raw?url=',
-                'https://cors-anywhere.herokuapp.com/'
-            ];
-
-            for (let proxy of proxies) {
-                try {
-                    const proxyUrl = proxy + encodeURIComponent(url);
-                    const response = await fetch(proxyUrl, options);
-                    if (response.ok) {
-                        const text = await response.text();
-                        try {
-                            return JSON.parse(text);
-                        } catch (parseErr) {
-                            // Jaga-jaga kalau allorigins nge-wrap format lain
-                            return JSON.parse(text);
-                        }
-                    }
-                } catch (err) {
-                    console.warn(`Proxy ${proxy} gagal, mencoba jalur lain...`);
-                }
-            }
-
-            throw new Error("Gagal terhubung ke server pembayaran. Semua jalur proxy sibuk.");
-        }
-
-        // ================= PAYMENT GATEWAY (RAMASHOP) =================
+        // ================= PAYMENT GATEWAY (VIA VERCEL API) =================
         async function initiatePayment() {
             const btn = document.getElementById('btnBuy');
             const spinner = document.getElementById('spinBuy');
             btn.disabled = true; spinner.style.display = 'block';
 
-            const apiUrl = 'https://ramashop.my.id/api/public/deposit/create';
-            const requestOptions = {
-                method: 'POST',
-                headers: {
-                    'X-API-Key': RAMASHOP_API_KEY,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ amount: 1000, method: 'qris' })
-            };
-
             try {
-                const result = await fetchWithCorsBypass(apiUrl, requestOptions);
+                const response = await fetch('/api/deposit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ type: 'create', amount: 1000, method: 'qris' })
+                });
+                const result = await response.json();
 
                 if (result.success) {
                     currentDepositId = result.data.depositId;
@@ -413,17 +371,16 @@
         function startPollingPayment() {
             if (paymentInterval) clearInterval(paymentInterval);
             
-            const statusApiUrl = `https://ramashop.my.id/api/public/deposit/status/${currentDepositId}`;
-            const requestOptions = {
-                method: 'GET',
-                headers: { 'X-API-Key': RAMASHOP_API_KEY }
-            };
-            
             paymentInterval = setInterval(async () => {
                 try {
-                    const statusRes = await fetchWithCorsBypass(statusApiUrl, requestOptions);
+                    const response = await fetch('/api/deposit', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ type: 'status', depositId: currentDepositId })
+                    });
+                    const statusRes = await response.json();
                     
-                    if (statusRes.status && (statusRes.data.status === 'success' || statusRes.data.status === 'already')) {
+                    if (statusRes.status && statusRes.data && (statusRes.data.status === 'success' || statusRes.data.status === 'already')) {
                         clearInterval(paymentInterval);
                         paymentSuccess();
                     }
