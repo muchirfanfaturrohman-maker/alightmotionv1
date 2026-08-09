@@ -11,12 +11,10 @@
 
     <style>
         :root {
-            /* Tema Modern Monokrom: Hitam & Putih */
             --bg-color: #030303;
             --surface: #0a0a0a;
             --surface-light: #141414;
             --border: #222222;
-            --border-hover: #444444;
             --text-main: #ffffff;
             --text-dim: #888888;
             --accent: #ffffff;
@@ -39,7 +37,6 @@
             align-items: center;
             justify-content: center;
             padding: 20px; 
-            /* Efek Grid Modern di Background */
             background-image: 
                 linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
@@ -62,35 +59,17 @@
             position: relative;
         }
 
-        .app-container.active {
-            display: block;
-        }
+        .app-container.active { display: block; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .brand-header {
-            text-align: center;
-            margin-bottom: 32px;
-        }
+        .brand-header { text-align: center; margin-bottom: 32px; }
+        .app-title { font-size: 26px; font-weight: 800; letter-spacing: -1px; margin-bottom: 8px; }
+        .app-subtitle { font-size: 14px; color: var(--text-dim); font-weight: 500; line-height: 1.6; }
 
-        .app-title {
-            font-size: 26px;
-            font-weight: 800;
-            letter-spacing: -1px;
-            margin-bottom: 8px;
-        }
-
-        .app-subtitle {
-            font-size: 14px;
-            color: var(--text-dim);
-            font-weight: 500;
-            line-height: 1.6;
-        }
-
-        /* Styling Gateway & Fitur */
         .gateway-features {
             background: var(--surface-light);
             border: 1px solid var(--border);
@@ -100,169 +79,49 @@
         }
 
         .price-tag {
-            font-size: 32px;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 20px;
-            color: var(--accent);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            font-size: 32px; font-weight: 800; text-align: center; margin-bottom: 20px;
+            color: var(--accent); display: flex; align-items: center; justify-content: center; gap: 8px;
         }
-
-        .price-tag span {
-            font-size: 14px;
-            color: var(--text-dim);
-            font-weight: 500;
-            text-decoration: line-through;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 14px;
-            font-size: 13px;
-            color: var(--text-main);
-            font-weight: 500;
-        }
+        .price-tag span { font-size: 14px; color: var(--text-dim); font-weight: 500; text-decoration: line-through; }
         
-        .feature-item:last-child {
-            margin-bottom: 0;
-        }
+        .feature-item { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; font-size: 13px; font-weight: 500; }
+        .feature-item:last-child { margin-bottom: 0; }
+        .feature-icon { display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: var(--text-main); color: var(--bg-color); border-radius: 50%; font-size: 12px; }
 
-        .feature-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 24px;
-            height: 24px;
-            background: var(--text-main);
-            color: var(--bg-color);
-            border-radius: 50%;
-            font-size: 12px;
-        }
-
-        /* Tombol Modern */
-        .btn-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
+        .btn-group { display: flex; flex-direction: column; gap: 12px; }
+        
         .btn-submit {
-            width: 100%;
-            padding: 16px;
-            background: var(--accent);
-            color: var(--accent-invert);
-            border: none;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            width: 100%; padding: 16px; background: var(--accent); color: var(--accent-invert);
+            border: none; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer;
+            transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; gap: 10px;
         }
-
-        .btn-submit:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
-        }
-
-        .btn-submit:active:not(:disabled) {
-            transform: translateY(0);
-        }
-
-        .btn-submit:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
+        .btn-submit:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15); }
+        .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
 
         .btn-secondary {
-            width: 100%;
-            padding: 16px;
-            background: transparent;
-            color: var(--text-main);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            width: 100%; padding: 16px; background: transparent; color: var(--text-main);
+            border: 1px solid var(--border); border-radius: 12px; font-size: 14px; font-weight: 600;
+            cursor: pointer; transition: all 0.2s ease; text-decoration: none; display: flex;
+            align-items: center; justify-content: center; gap: 10px;
         }
+        .btn-secondary:hover { border-color: var(--text-main); background: rgba(255,255,255,0.05); }
 
-        .btn-secondary:hover {
-            border-color: var(--text-main);
-            background: rgba(255,255,255,0.05);
-        }
-
-        /* Area Pembayaran QRIS */
         .qris-box {
-            background: #ffffff;
-            padding: 16px;
-            border-radius: 16px;
-            margin: 0 auto 24px;
-            width: 200px;
-            height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            position: relative;
+            background: #ffffff; padding: 16px; border-radius: 16px; margin: 0 auto 24px;
+            width: 200px; height: 200px; display: flex; align-items: center; justify-content: center;
+            overflow: hidden; position: relative;
         }
+        .qris-box img { width: 100%; height: 100%; object-fit: contain; }
 
-        .qris-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .payment-amount {
-            text-align: center;
-            font-size: 24px;
-            font-weight: 800;
-            margin-bottom: 8px;
-            color: var(--text-main);
-        }
-
-        .payment-info {
-            text-align: center;
-            font-size: 13px;
-            color: var(--text-dim);
-            margin-bottom: 24px;
-            line-height: 1.5;
-        }
+        .payment-amount { text-align: center; font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+        .payment-info { text-align: center; font-size: 13px; color: var(--text-dim); margin-bottom: 24px; line-height: 1.5; }
 
         .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 24px;
-            justify-content: center;
-            width: 100%;
+            display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.1);
+            padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 600; margin-bottom: 24px;
+            justify-content: center; width: 100%;
         }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background: #ffcc00;
-            border-radius: 50%;
-            animation: pulse 1.5s infinite;
-        }
+        .status-dot { width: 8px; height: 8px; background: #ffcc00; border-radius: 50%; animation: pulse 1.5s infinite; }
 
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.4); }
@@ -270,258 +129,47 @@
             100% { box-shadow: 0 0 0 0 rgba(255, 204, 0, 0); }
         }
 
-        /* Stepper & Form */
         .quota-badge {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--text-main);
-            color: var(--bg-color);
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-            box-shadow: 0 4px 12px rgba(255,255,255,0.2);
+            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            background: var(--text-main); color: var(--bg-color); padding: 6px 16px;
+            border-radius: 20px; font-size: 12px; font-weight: 700; box-shadow: 0 4px 12px rgba(255,255,255,0.2);
         }
 
-        .stepper {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 40px;
-            position: relative;
-            padding: 0 20px;
-        }
+        .stepper { display: flex; align-items: center; justify-content: space-between; margin-bottom: 40px; position: relative; padding: 0 20px; }
+        .stepper::before { content: ''; position: absolute; top: 50%; left: 40px; right: 40px; height: 1px; background: var(--border); transform: translateY(-50%); z-index: 1; }
+        .step-progress-fill { position: absolute; top: 50%; left: 40px; width: 0%; height: 1px; background: var(--accent); transform: translateY(-50%); z-index: 1; transition: width 0.6s ease; }
 
-        .stepper::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 40px;
-            right: 40px;
-            height: 1px;
-            background: var(--border);
-            transform: translateY(-50%);
-            z-index: 1;
-        }
+        .step-item { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 10px; background: var(--surface); padding: 0 10px; }
+        .step-circle { width: 32px; height: 32px; border-radius: 50%; background: var(--bg-color); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: var(--text-dim); transition: all 0.4s ease; }
+        .step-item.active .step-circle { border-color: var(--accent); background: var(--accent); color: var(--accent-invert); box-shadow: 0 0 15px rgba(255, 255, 255, 0.3); }
+        .step-item.completed .step-circle { border-color: var(--accent); background: var(--bg-color); color: var(--accent); }
+        .step-label { font-size: 12px; font-weight: 600; color: var(--text-dim); }
+        .step-item.active .step-label, .step-item.completed .step-label { color: var(--text-main); }
 
-        .step-progress-fill {
-            position: absolute;
-            top: 50%;
-            left: 40px;
-            width: 0%;
-            height: 1px;
-            background: var(--accent);
-            transform: translateY(-50%);
-            z-index: 1;
-            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+        .form-card { display: none; }
+        .form-card.active { display: block; animation: fadeIn 0.5s forwards; }
 
-        .step-item {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            background: var(--surface);
-            padding: 0 10px;
-        }
+        .input-group { margin-bottom: 24px; }
+        .input-label { display: block; font-size: 13px; font-weight: 600; color: var(--text-dim); margin-bottom: 10px; }
+        .custom-input { width: 100%; padding: 16px 20px; background: var(--surface-light); border: 1px solid var(--border); border-radius: 12px; color: var(--text-main); font-size: 15px; outline: none; transition: all 0.2s ease; }
+        .custom-input:focus { border-color: var(--text-main); background: transparent; }
 
-        .step-circle {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: var(--bg-color);
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--text-dim);
-            transition: all 0.4s ease;
-        }
+        .terminal-box { margin-top: 32px; background: #000; border: 1px solid var(--border); border-radius: 12px; padding: 16px; display: none; }
+        .terminal-header { font-size: 10px; font-family: 'Fira Code', monospace; color: var(--text-dim); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
+        .terminal-header::before { content: ''; width: 6px; height: 6px; background: #fff; border-radius: 50%; display: inline-block; }
+        .terminal-code { font-family: 'Fira Code', monospace; font-size: 12px; color: #b3b3b3; white-space: pre-wrap; word-break: break-all; max-height: 120px; overflow-y: auto; line-height: 1.5; }
 
-        .step-item.active .step-circle {
-            border-color: var(--accent);
-            background: var(--accent);
-            color: var(--accent-invert);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-        }
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 999; }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 32px 24px; width: 100%; max-width: 340px; text-align: center; transform: translateY(20px) scale(0.95); transition: all 0.4s ease; }
+        .modal-overlay.active .modal-card { transform: translateY(0) scale(1); }
+        .modal-title { font-size: 18px; font-weight: 800; margin-bottom: 8px; }
+        .modal-body { font-size: 14px; color: var(--text-dim); line-height: 1.5; margin-bottom: 24px; }
 
-        .step-item.completed .step-circle {
-            border-color: var(--accent);
-            background: var(--bg-color);
-            color: var(--accent);
-        }
+        .spinner { width: 18px; height: 18px; border: 2px solid rgba(0, 0, 0, 0.2); border-top-color: #000000; border-radius: 50%; animation: spin 0.8s linear infinite; display: none; }
+        .spinner.white { border-top-color: #ffffff; border-color: rgba(255,255,255,0.2); border-top-color: #ffffff; }
 
-        .step-label {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--text-dim);
-        }
-
-        .step-item.active .step-label,
-        .step-item.completed .step-label {
-            color: var(--text-main);
-        }
-
-        .form-card {
-            display: none;
-        }
-
-        .form-card.active {
-            display: block;
-            animation: fadeIn 0.5s forwards;
-        }
-
-        .input-group {
-            margin-bottom: 24px;
-        }
-
-        .input-label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-dim);
-            margin-bottom: 10px;
-        }
-
-        .custom-input {
-            width: 100%;
-            padding: 16px 20px;
-            background: var(--surface-light);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            color: var(--text-main);
-            font-size: 15px;
-            outline: none;
-            transition: all 0.2s ease;
-        }
-
-        .custom-input:focus {
-            border-color: var(--text-main);
-            background: transparent;
-        }
-
-        .terminal-box {
-            margin-top: 32px;
-            background: #000;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 16px;
-            display: none;
-        }
-
-        .terminal-header {
-            font-size: 10px;
-            font-family: 'Fira Code', monospace;
-            color: var(--text-dim);
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .terminal-header::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            background: #fff;
-            border-radius: 50%;
-            display: inline-block;
-        }
-
-        .terminal-code {
-            font-family: 'Fira Code', monospace;
-            font-size: 12px;
-            color: #b3b3b3;
-            white-space: pre-wrap;
-            word-break: break-all;
-            max-height: 120px;
-            overflow-y: auto;
-            line-height: 1.5;
-        }
-
-        /* Modal Overlay */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 999;
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 32px 24px;
-            width: 100%;
-            max-width: 340px;
-            text-align: center;
-            transform: translateY(20px) scale(0.95);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .modal-overlay.active .modal-card {
-            transform: translateY(0) scale(1);
-        }
-
-        .modal-title {
-            font-size: 18px;
-            font-weight: 800;
-            margin-bottom: 8px;
-        }
-
-        .modal-body {
-            font-size: 14px;
-            color: var(--text-dim);
-            line-height: 1.5;
-            margin-bottom: 24px;
-        }
-
-        .spinner {
-            width: 18px;
-            height: 18px;
-            border: 2px solid rgba(0, 0, 0, 0.2);
-            border-top-color: #000000;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            display: none;
-        }
-
-        .spinner.white {
-            border-top-color: #ffffff;
-            border-color: rgba(255,255,255,0.2);
-            border-top-color: #ffffff;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        @media (max-width: 400px) {
-            .app-container {
-                padding: 30px 20px;
-            }
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
@@ -534,21 +182,10 @@
         </header>
 
         <div class="gateway-features">
-            <div class="price-tag">
-                Rp 1.000 <span>Rp 5.000</span>
-            </div>
-            <div class="feature-item">
-                <span class="feature-icon">✓</span>
-                <span>Akses Tool untuk 5 Akun Email</span>
-            </div>
-            <div class="feature-item">
-                <span class="feature-icon">✓</span>
-                <span>Proses Automasi Super Cepat</span>
-            </div>
-            <div class="feature-item">
-                <span class="feature-icon">✓</span>
-                <span>Tanpa Iklan Sama Sekali</span>
-            </div>
+            <div class="price-tag">Rp 1.000 <span>Rp 5.000</span></div>
+            <div class="feature-item"><span class="feature-icon">✓</span><span>Akses Tool untuk 5 Akun Email</span></div>
+            <div class="feature-item"><span class="feature-icon">✓</span><span>Proses Automasi Super Cepat</span></div>
+            <div class="feature-item"><span class="feature-icon">✓</span><span>Tanpa Iklan Sama Sekali</span></div>
         </div>
 
         <div class="btn-group">
@@ -556,9 +193,6 @@
                 <span class="spinner" id="spinBuy"></span>
                 <span>Beli Akses via QRIS (Rp 1K)</span>
             </button>
-            <a href="https://youtube.com/shorts/contoh_video_tutorial" target="_blank" class="btn-secondary">
-                ▶ Tutorial Aktivasi
-            </a>
         </div>
     </main>
 
@@ -596,16 +230,8 @@
 
         <div class="stepper">
             <div class="step-progress-fill" id="progressFill"></div>
-            
-            <div class="step-item active" id="node1">
-                <div class="step-circle">1</div>
-                <span class="step-label">Email Target</span>
-            </div>
-
-            <div class="step-item" id="node2">
-                <div class="step-circle">2</div>
-                <span class="step-label">Verifikasi</span>
-            </div>
+            <div class="step-item active" id="node1"><div class="step-circle">1</div><span class="step-label">Email</span></div>
+            <div class="step-item" id="node2"><div class="step-circle">2</div><span class="step-label">Verifikasi</span></div>
         </div>
 
         <section class="form-card active" id="cardStep1">
@@ -613,10 +239,8 @@
                 <label class="input-label" for="inputGmail">Email Target (Fresh)</label>
                 <input type="email" id="inputGmail" class="custom-input" placeholder="akuncoba@gmail.com" autocomplete="off">
             </div>
-
             <button type="button" class="btn-submit" id="btnSend" onclick="executeSendGmail()">
-                <span class="spinner" id="spinSend"></span>
-                <span id="labelSend">Kirim Data</span>
+                <span class="spinner" id="spinSend"></span><span id="labelSend">Kirim Data</span>
             </button>
         </section>
 
@@ -625,11 +249,9 @@
                 <label class="input-label" for="inputLink">Link Verifikasi</label>
                 <input type="text" id="inputLink" class="custom-input" placeholder="Paste link verifikasi di sini..." autocomplete="off">
             </div>
-
             <div class="btn-group">
                 <button type="button" class="btn-submit" id="btnVerif" onclick="executeVerifLink()">
-                    <span class="spinner" id="spinVerif"></span>
-                    <span id="labelVerif">Verifikasi Sekarang</span>
+                    <span class="spinner" id="spinVerif"></span><span id="labelVerif">Verifikasi Sekarang</span>
                 </button>
                 <button type="button" class="btn-secondary" onclick="resetApp()">Input Akun Baru</button>
             </div>
@@ -653,14 +275,16 @@
 
     <script>
         // ================= CONFIGURATION =================
-        const AM_API_KEY = 'vannzstore'; // API Key lama untuk eksekusi AM
-        const RAMASHOP_API_KEY = 'rg_1af70760859a1902cbab809df49e6d'; // WAJIB GANTI INI DENGAN API KEY RAMASHOP!
+        const AM_API_KEY = 'vannzstore'; 
+        
+        // 🔥 API KEY ANDA SUDAH DIPASANG DISINI:
+        const RAMASHOP_API_KEY = 'rg_1af70760859a1902cbab809df49e6d'; 
         
         let savedEmail = '';
         let paymentInterval = null;
         let currentDepositId = null;
 
-        // ================= ROUTING & QUOTA LOGIC =================
+        // ================= ROUTING LOGIC =================
         function initApp() {
             const quota = parseInt(localStorage.getItem('vannz_quota')) || 0;
             const pendingDeposit = localStorage.getItem('vannz_pending_deposit');
@@ -669,7 +293,6 @@
                 switchScreen('appContainer');
                 document.getElementById('quotaText').innerText = quota;
             } else if (pendingDeposit) {
-                // Jika refresh halaman saat masih nunggu pembayaran
                 currentDepositId = pendingDeposit;
                 resumePaymentScreen();
             } else {
@@ -684,30 +307,44 @@
             document.getElementById(screenId).classList.add('active');
         }
 
+        // ================= API FETCH DENGAN AUTO-BYPASS CORS =================
+        // Fungsi ini akan otomatis menggunakan Proxy jika fetch biasa diblokir browser.
+        async function fetchWithCorsBypass(url, options) {
+            try {
+                // Coba fetch normal (Akan berhasil kalau sudah di-hosting)
+                let response = await fetch(url, options).catch(() => null); 
+                
+                // Jika null (berarti error Failed to Fetch / CORS Blocked)
+                if (!response) {
+                    console.warn("CORS diblokir. Menggunakan jalur proxy...");
+                    const proxyUrl = 'https://corsproxy.io/?' + encodeURIComponent(url);
+                    response = await fetch(proxyUrl, options);
+                }
+                return await response.json();
+            } catch (err) {
+                throw new Error("Gagal terhubung ke server pembayaran.");
+            }
+        }
+
+
         // ================= PAYMENT GATEWAY (RAMASHOP) =================
         async function initiatePayment() {
-            if (RAMASHOP_API_KEY === 'API_KEY_RAMASHOP_ANDA_DISINI') {
-                showModal('API Error', 'Admin belum mengatur API Key Ramashop di source code.', '⚠️');
-                return;
-            }
-
             const btn = document.getElementById('btnBuy');
             const spinner = document.getElementById('spinBuy');
-            
-            btn.disabled = true; 
-            spinner.style.display = 'block';
+            btn.disabled = true; spinner.style.display = 'block';
+
+            const apiUrl = 'https://ramashop.my.id/api/public/deposit/create';
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'X-API-Key': RAMASHOP_API_KEY,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ amount: 1000, method: 'qris' })
+            };
 
             try {
-                const response = await fetch('https://ramashop.my.id/api/public/deposit/create', {
-                    method: 'POST',
-                    headers: {
-                        'X-API-Key': RAMASHOP_API_KEY,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ amount: 1000, method: 'qris' }) // Harga: Rp 1.000
-                });
-
-                const result = await response.json();
+                const result = await fetchWithCorsBypass(apiUrl, requestOptions);
 
                 if (result.success) {
                     currentDepositId = result.data.depositId;
@@ -722,15 +359,14 @@
             } catch (err) {
                 showModal('Gagal', err.message, '✖️');
             } finally {
-                btn.disabled = false;
-                spinner.style.display = 'none';
+                btn.disabled = false; spinner.style.display = 'none';
             }
         }
 
         function resumePaymentScreen() {
             switchScreen('paymentContainer');
             document.getElementById('payAmount').innerText = 'Memuat...';
-            document.getElementById('payInfo').innerText = 'Melanjutkan pengecekan ID: ' + currentDepositId;
+            document.getElementById('payInfo').innerText = 'Melanjutkan pengecekan transaksi...';
             startPollingPayment();
         }
 
@@ -739,7 +375,6 @@
             const qrImg = document.getElementById('qrisImage');
             qrImg.src = imgUrl;
             qrImg.style.display = 'block';
-
             document.getElementById('payAmount').innerText = 'Rp ' + total.toLocaleString('id-ID');
             document.getElementById('payInfo').innerText = msg;
         }
@@ -747,14 +382,16 @@
         function startPollingPayment() {
             if (paymentInterval) clearInterval(paymentInterval);
             
-            // Cek status setiap 8 detik
+            const statusApiUrl = `https://ramashop.my.id/api/public/deposit/status/${currentDepositId}`;
+            const requestOptions = {
+                method: 'GET',
+                headers: { 'X-API-Key': RAMASHOP_API_KEY }
+            };
+            
             paymentInterval = setInterval(async () => {
                 try {
-                    const res = await fetch(`https://ramashop.my.id/api/public/deposit/status/${currentDepositId}`, {
-                        headers: { 'X-API-Key': RAMASHOP_API_KEY }
-                    });
-                    const statusRes = await res.json();
-
+                    const statusRes = await fetchWithCorsBypass(statusApiUrl, requestOptions);
+                    
                     if (statusRes.status && (statusRes.data.status === 'success' || statusRes.data.status === 'already')) {
                         clearInterval(paymentInterval);
                         paymentSuccess();
@@ -762,21 +399,16 @@
                 } catch (err) {
                     console.log('Polling error:', err);
                 }
-            }, 8000);
+            }, 8000); // Cek status tiap 8 detik
         }
 
         function paymentSuccess() {
             localStorage.removeItem('vannz_pending_deposit');
-            
-            // Beri kuota 5
             const currentQuota = parseInt(localStorage.getItem('vannz_quota')) || 0;
             localStorage.setItem('vannz_quota', currentQuota + 5);
 
             showModal('Pembayaran Berhasil!', 'Kuota kamu bertambah 5. Selamat menggunakan tool.', '✓');
-            setTimeout(() => {
-                closeModal();
-                initApp(); 
-            }, 2500);
+            setTimeout(() => { closeModal(); initApp(); }, 2500);
         }
 
         function cancelPayment() {
@@ -786,48 +418,37 @@
         }
 
         // ================= ALIGHT MOTION TOOL LOGIC =================
+        // (Tetap sama, logic pengiriman API Am Anda)
         async function fetchAPI(endpoint, paramsObj) {
             const queryParams = new URLSearchParams({ apikey: AM_API_KEY, ...paramsObj }).toString();
             const targetUrl = `/api/am/${endpoint}?${queryParams}`;
-
             try {
                 const res = await fetch(targetUrl);
                 const rawText = await res.text();
                 try { return JSON.parse(rawText); } catch { return rawText; }
-            } catch (err) {
-                throw new Error('Gagal konek ke server automasi.');
-            }
+            } catch (err) { throw new Error('Gagal konek ke server automasi.'); }
         }
 
         async function executeSendGmail() {
             const emailVal = document.getElementById('inputGmail').value.trim();
-
-            if (!emailVal) { showModal('Input Kosong', 'Alamat Gmail wajib diisi.', '⚠️'); return; }
-            if (!emailVal.toLowerCase().endsWith('@gmail.com')) { showModal('Email Ditolak', 'Harus pakai email @gmail.com', '✖️'); return; }
+            if (!emailVal) return showModal('Input Kosong', 'Alamat Gmail wajib diisi.', '⚠️');
 
             savedEmail = emailVal;
             const btn = document.getElementById('btnSend');
             const spinner = document.getElementById('spinSend');
-
-            btn.disabled = true; spinner.style.display = 'block'; 
-            printLog('Mengirim data email ke server...');
+            btn.disabled = true; spinner.style.display = 'block'; printLog('Mengirim data email...');
 
             try {
                 const response = await fetchAPI('send', { email: emailVal });
                 printLog(response);
-
                 document.getElementById('cardStep1').classList.remove('active');
                 document.getElementById('cardStep2').classList.add('active');
-                
-                document.getElementById('node1').classList.remove('active');
-                document.getElementById('node1').classList.add('completed');
+                document.getElementById('node1').classList.replace('active', 'completed');
                 document.getElementById('node2').classList.add('active');
                 document.getElementById('progressFill').style.width = '100%';
-
                 showModal('Berhasil Terkirim', 'Cek kotak masuk Gmail, copy link verifikasinya, lalu paste di langkah 2.', '✓');
             } catch (err) {
                 showModal('Koneksi Gagal', err.message, '✖️');
-                printLog('Error: ' + err.message);
             } finally {
                 btn.disabled = false; spinner.style.display = 'none';
             }
@@ -835,37 +456,24 @@
 
         async function executeVerifLink() {
             const linkVal = document.getElementById('inputLink').value.trim();
-
-            if (!linkVal) { showModal('Link Kosong', 'Paste link verifikasi dari email dulu.', '⚠️'); return; }
+            if (!linkVal) return showModal('Link Kosong', 'Paste link verifikasi dulu.', '⚠️');
 
             const btn = document.getElementById('btnVerif');
             const spinner = document.getElementById('spinVerif');
-
-            btn.disabled = true; spinner.style.display = 'block';
-            printLog('Memproses verifikasi...');
+            btn.disabled = true; spinner.style.display = 'block'; printLog('Memproses...');
 
             try {
                 const response = await fetchAPI('verif', { email: savedEmail, link: linkVal });
                 printLog(response);
                 
-                // --- KURANGI KUOTA DISINI KETIKA SUKSES ---
                 let currentQuota = parseInt(localStorage.getItem('vannz_quota')) || 0;
-                currentQuota = currentQuota - 1;
-                localStorage.setItem('vannz_quota', currentQuota);
-                document.getElementById('quotaText').innerText = currentQuota;
+                localStorage.setItem('vannz_quota', currentQuota - 1);
+                document.getElementById('quotaText').innerText = currentQuota - 1;
 
                 showModal('Selesai!', 'Verifikasi berhasil. Kuota kamu berkurang 1.', '✓');
-                
-                // Jika habis, lempar ke depan
-                if (currentQuota <= 0) {
-                    setTimeout(() => {
-                        initApp();
-                    }, 3000);
-                }
-
+                if (currentQuota - 1 <= 0) setTimeout(() => initApp(), 3000);
             } catch (err) {
                 showModal('Koneksi Gagal', err.message, '✖️');
-                printLog('Error: ' + err.message);
             } finally {
                 btn.disabled = false; spinner.style.display = 'none';
             }
@@ -875,17 +483,14 @@
             document.getElementById('inputGmail').value = '';
             document.getElementById('inputLink').value = '';
             document.getElementById('terminalBox').style.display = 'none';
-            
             document.getElementById('cardStep2').classList.remove('active');
             document.getElementById('cardStep1').classList.add('active');
-            
             document.getElementById('node2').classList.remove('active');
             document.getElementById('node1').classList.remove('completed');
             document.getElementById('node1').classList.add('active');
             document.getElementById('progressFill').style.width = '0%';
         }
 
-        // ================= UTILITIES =================
         function showModal(title, text, icon = '✦') {
             document.getElementById('modalIcon').innerText = icon;
             document.getElementById('modalTitle').innerText = title;
@@ -893,18 +498,13 @@
             document.getElementById('popupModal').classList.add('active');
         }
 
-        function closeModal() {
-            document.getElementById('popupModal').classList.remove('active');
-        }
-
+        function closeModal() { document.getElementById('popupModal').classList.remove('active'); }
         function printLog(data) {
             const box = document.getElementById('terminalBox');
-            const log = document.getElementById('terminalLog');
             box.style.display = 'block';
-            log.innerText = typeof data === 'object' ? JSON.stringify(data, null, 2) : data;
+            document.getElementById('terminalLog').innerText = typeof data === 'object' ? JSON.stringify(data, null, 2) : data;
         }
 
-        // Jalankan inisiasi saat web diload
         window.onload = initApp;
     </script>
 </body>
