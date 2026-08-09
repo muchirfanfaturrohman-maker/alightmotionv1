@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/am/:path*",
+      "destination": "https://api.jerexd.my.id/api/am/:path*"
+    }
+  ]
+}
