@@ -276,8 +276,6 @@
     <script>
         // ================= CONFIGURATION =================
         const AM_API_KEY = 'vannzstore'; 
-        
-        // 🔥 API KEY ANDA SUDAH DIPASANG DISINI:
         const RAMASHOP_API_KEY = 'rg_1af70760859a1902cbab809df49e6d'; 
         
         let savedEmail = '';
@@ -308,13 +306,10 @@
         }
 
         // ================= API FETCH DENGAN AUTO-BYPASS CORS =================
-        // Fungsi ini akan otomatis menggunakan Proxy jika fetch biasa diblokir browser.
         async function fetchWithCorsBypass(url, options) {
             try {
-                // Coba fetch normal (Akan berhasil kalau sudah di-hosting)
                 let response = await fetch(url, options).catch(() => null); 
                 
-                // Jika null (berarti error Failed to Fetch / CORS Blocked)
                 if (!response) {
                     console.warn("CORS diblokir. Menggunakan jalur proxy...");
                     const proxyUrl = 'https://corsproxy.io/?' + encodeURIComponent(url);
@@ -325,7 +320,6 @@
                 throw new Error("Gagal terhubung ke server pembayaran.");
             }
         }
-
 
         // ================= PAYMENT GATEWAY (RAMASHOP) =================
         async function initiatePayment() {
@@ -348,10 +342,17 @@
 
                 if (result.success) {
                     currentDepositId = result.data.depositId;
+                    
+                    const rawImg = result.data.qrImage || result.data.qr_image;
+                    const finalQrImg = rawImg ? rawImg : `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(result.data.qrString)}`;
+
                     localStorage.setItem('vannz_pending_deposit', currentDepositId);
+                    localStorage.setItem('vannz_qr_img', finalQrImg);
+                    localStorage.setItem('vannz_qr_amount', result.data.totalAmount);
+                    localStorage.setItem('vannz_qr_msg', result.message);
                     
                     switchScreen('paymentContainer');
-                    setupPaymentUI(result.data.qrImage, result.data.totalAmount, result.message);
+                    setupPaymentUI(finalQrImg, result.data.totalAmount, result.message);
                     startPollingPayment();
                 } else {
                     throw new Error(result.message || 'Gagal generate QRIS');
@@ -365,8 +366,18 @@
 
         function resumePaymentScreen() {
             switchScreen('paymentContainer');
-            document.getElementById('payAmount').innerText = 'Memuat...';
-            document.getElementById('payInfo').innerText = 'Melanjutkan pengecekan transaksi...';
+            
+            const savedImg = localStorage.getItem('vannz_qr_img');
+            const savedAmount = localStorage.getItem('vannz_qr_amount');
+            const savedMsg = localStorage.getItem('vannz_qr_msg');
+
+            if (savedImg && savedAmount) {
+                setupPaymentUI(savedImg, parseInt(savedAmount), savedMsg || 'Melanjutkan pembayaran...');
+            } else {
+                document.getElementById('payAmount').innerText = 'Memuat...';
+                document.getElementById('payInfo').innerText = 'Melanjutkan pengecekan transaksi...';
+            }
+            
             startPollingPayment();
         }
 
@@ -399,11 +410,15 @@
                 } catch (err) {
                     console.log('Polling error:', err);
                 }
-            }, 8000); // Cek status tiap 8 detik
+            }, 8000);
         }
 
         function paymentSuccess() {
             localStorage.removeItem('vannz_pending_deposit');
+            localStorage.removeItem('vannz_qr_img');
+            localStorage.removeItem('vannz_qr_amount');
+            localStorage.removeItem('vannz_qr_msg');
+            
             const currentQuota = parseInt(localStorage.getItem('vannz_quota')) || 0;
             localStorage.setItem('vannz_quota', currentQuota + 5);
 
@@ -414,11 +429,14 @@
         function cancelPayment() {
             if (paymentInterval) clearInterval(paymentInterval);
             localStorage.removeItem('vannz_pending_deposit');
+            localStorage.removeItem('vannz_qr_img');
+            localStorage.removeItem('vannz_qr_amount');
+            localStorage.removeItem('vannz_qr_msg');
+            
             switchScreen('gatewayContainer');
         }
 
         // ================= ALIGHT MOTION TOOL LOGIC =================
-        // (Tetap sama, logic pengiriman API Am Anda)
         async function fetchAPI(endpoint, paramsObj) {
             const queryParams = new URLSearchParams({ apikey: AM_API_KEY, ...paramsObj }).toString();
             const targetUrl = `/api/am/${endpoint}?${queryParams}`;
